@@ -4,7 +4,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Geocoding service</title>
+    <title>Fellowship of the bow users</title>
     <style>
       html, body, #map-canvas {
         height: 100%;
@@ -31,7 +31,7 @@ var map;
 
 
 var newDate = new Date;
-var markerFile = 'markers.json;
+var markerFile = 'markers.json';
  
 // set default map properties
 var defaultLatlng = new google.maps.LatLng(49.00,10.00);
@@ -126,8 +126,7 @@ var name = document.getElementById('desc').value;
       map.setCenter(results[0].geometry.location);
 	
     // Fire Google Goal
-			_gaq.push(['_trackPageview', '/tracking/marker-submit']);
- 
+			
 			// set new maker id via timestamp
 			var newDate = new Date;
 			var markerId = newDate.getTime();
