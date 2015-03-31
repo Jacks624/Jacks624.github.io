@@ -81,24 +81,39 @@ function loadMarkers(){
 }
 
 function loadMarker(markerData){
-	var myLatlng = new google.maps.LatLng(markerData['lat'],markerData['long']);
-
-	var marker = new google.maps.Marker({
-	    id: markerData['id'],
-	    map: map,
-	    title: markerData['name'] ,
-	    position: myLatlng
-	});
-	markerList[marker.id] = marker;
- 
-	google.maps.event.addListener(marker, 'click', function() {
-
-		showMarker(marker.id);
-	});
-	google.maps.event.addListener(infowindow,'closeclick', function() {
-		map.setCenter(defaultLatlng);
-		map.setZoom(defaultZoom);
-	});
+      
+                // get date
+                var mDate = new Date( markerData['created']*1000 );
+            
+                // create new marker location
+                var myLatlng = new google.maps.LatLng(markerData['lat'],markerData['long']);
+        
+                // create new marker				
+                var marker = new google.maps.Marker({
+                    id: markerData['id'],
+                    map: map, 
+                    title: markerData['creator'] + ' - ' + markerData['name'] ,
+                    position: myLatlng
+                });
+        
+                // add marker to list used later to get content and additional marker information
+                markerList[marker.id] = marker;
+        
+                // add event listener when marker is clicked
+                // currently the marker data contain a dataurl field this can of course be done different
+                google.maps.event.addListener(marker, 'click', function() {
+                    
+                    // show marker when clicked
+                    showMarker(marker.id);
+        
+                });
+        
+                // add event when marker window is closed to reset map location
+                google.maps.event.addListener(infowindow,'closeclick', function() { 
+                    map.setCenter(defaultLatlng);
+                    map.setZoom(defaultZoom);
+                }); 	
+                
 }
 function showMarker(markerId){
  
